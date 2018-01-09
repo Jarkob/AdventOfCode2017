@@ -1,0 +1,5 @@
+/Users/jakobbussas/Projects/AdventOfCode/Day10/Day10/bin/Debug/Day10.exe
+/Users/jakobbussas/Projects/AdventOfCode/Day10/Day10/bin/Debug/Day10.pdb
+/Users/jakobbussas/Projects/AdventOfCode/Day10/Day10/obj/x86/Debug/Day10.csproj.CoreCompileInputs.cache
+/Users/jakobbussas/Projects/AdventOfCode/Day10/Day10/obj/x86/Debug/Day10.exe
+/Users/jakobbussas/Projects/AdventOfCode/Day10/Day10/obj/x86/Debug/Day10.pdb

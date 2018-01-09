@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{CF8F1DD7-8934-4D8D-A8EF-2DD29FD3DF5D}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Day7/Program.cs">
+    <Files>
+      <File FileName="Day7/Program.cs" Line="177" Column="20" />
+      <File FileName="Day7/ListElement.cs" Line="31" Column="120" />
+      <File FileName="Day7/TreeElement.cs" Line="121" Column="122" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Day7 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
