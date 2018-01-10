@@ -50,6 +50,29 @@ public class Program
 		}
 		
 		// Disc ist fertig beschrieben, jetzt müssen adjacent squares berechnet werden
+		int AmountOfSpaces = 0;
+		
+		// Komplizierter als gedacht
+		// Man muss erst alle reinfüllen und dann alle Spaces einzeln finden, bis es keine mehr gibt
+		
+		bool Contains = false;
+		do {
+			for(int i = 0; i < Disc.Length; i++)
+			{
+				for(int j = 0; j < Disc[i].Length; j++)
+				{
+					if(Disc[i][j] == -1)
+					{
+						Contains = true;
+						AmountOfSpaces++;
+						
+						// Jetzt wurde Spaceanfang gefunden -> ausfüllen
+					}
+				}
+			}
+		} while(Contains);
+		
+		Console.WriteLine("Anzahl Spaces: "+ AmountOfSpaces);
 	}
 	
 	
