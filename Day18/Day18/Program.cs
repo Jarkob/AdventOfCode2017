@@ -22,7 +22,7 @@ namespace Day18
             }
 
             // Set up registers
-            IDictionary<char, int> Registers = new Dictionary<char, int>();
+            IDictionary<char, long> Registers = new Dictionary<char, long>();
             Registers.Add('a', 0);
             Registers.Add('b', 0);
             Registers.Add('c', 0);
@@ -40,198 +40,96 @@ namespace Day18
             Registers.Add('o', 0);
             Registers.Add('p', 0);
 
+            Console.WriteLine("Result: "+ GetFirstRcv(Registers, Commands));
+
+
+
+            // 3675 too high
+            // 3188
+        }
+
+
+        private static int GetFirstRcv(IDictionary<char, long> Registers, string[][] Commands)
+        {
             int LastSound = 0;
 
-
-            // Arbeiten
-            int Index = 0;
-            while (Index < Commands.Length && Index > -1)
+            for (int i = 0; i < Commands.Length; i++)
             {
                 // debug
-                switch (Commands[Index][0])
+                //PrintRegister(Registers);
+
+                switch (Commands[i][0])
                 {
                     case "snd":
-                        Snd(ref Registers, Commands[Index][1][0], ref LastSound);
+                        LastSound = (int)Registers[Commands[i][1][0]];
                         break;
                     case "set":
-                        if (int.TryParse(Commands[Index][2], out var n))
-                        {
-                            Set(ref Registers, Commands[Index][1][0], Convert.ToInt32(Commands[Index][2]));
-                        }
-                        else
-                        {
-                            Set(ref Registers, Commands[Index][1][0], Commands[Index][2][0]);
-                        }
+                        Registers[Commands[i][1][0]] = int.TryParse(Commands[i][2], out var t)
+                                                          ? Convert.ToInt32(Commands[i][2])
+                                                          : Registers[Commands[i][2][0]];
                         break;
                     case "add":
-                        if (int.TryParse(Commands[Index][2], out var n0))
-                        {
-                            Add(ref Registers, Commands[Index][1][0], Convert.ToInt32(Commands[Index][2]));
-                        }
-                        else
-                        {
-                            Add(ref Registers, Commands[Index][1][0], Commands[Index][2][0]);
-                        }
+                        Registers[Commands[i][1][0]] += int.TryParse(Commands[i][2], out var t0)
+                                                          ? Convert.ToInt32(Commands[i][2])
+                                                          : Registers[Commands[i][2][0]];
                         break;
                     case "mul":
-                        if (int.TryParse(Commands[Index][2], out var n1))
-                        {
-                            Mul(ref Registers, Commands[Index][1][0], Convert.ToInt32(Commands[Index][2]));
-                        }
-                        else
-                        {
-                            Mul(ref Registers, Commands[Index][1][0], Commands[Index][2][0]);
-                        }
+                        Registers[Commands[i][1][0]] *= int.TryParse(Commands[i][2], out var t1)
+                                                          ? Convert.ToInt32(Commands[i][2])
+                                                          : Registers[Commands[i][2][0]];
                         break;
                     case "mod":
-                        if (int.TryParse(Commands[Index][2], out var n2))
-                        {
-                            Mod(ref Registers, Commands[Index][1][0], Convert.ToInt32(Commands[Index][2]));
-                        }
-                        else
-                        {
-                            Mod(ref Registers, Commands[Index][1][0], Commands[Index][2][0]);
-                        }
+                        Registers[Commands[i][1][0]] %= int.TryParse(Commands[i][2], out var t2)
+                                                          ? Convert.ToInt32(Commands[i][2])
+                                                          : Registers[Commands[i][2][0]];
                         break;
                     case "rcv":
-                        Rcv(ref Registers, Commands[Index][1][0], LastSound);
+                        if (Registers[Commands[i][1][0]] != 0)
+                        {
+                            Registers[Commands[i][1][0]] = LastSound;
+                            return LastSound;
+                        }
                         break;
                     case "jgz":
-                        // debug
-                        Console.WriteLine("Jgz commando: "+ Commands[Index][0] +" "+ Commands[Index][1] +" "+ Commands[Index][2]);
+                        bool Continue = false;
 
-                        // Hier ist der Wurm drin
-                        // Wenn Y numerisch ist
-                        if (int.TryParse(Commands[Index][2], out var n3))
+                        if (int.TryParse(Commands[i][1], out var n0))
                         {
-                            // Wenn X numerisch ist
-                            if (int.TryParse(Commands[Index][1], out var n4))
-                            {
-                                // debug
-                                Console.WriteLine("Result: Y numerisch, X numerisch");
-
-                                if (Convert.ToInt32(Commands[Index][1]) > 0)
-                                {
-                                    Index += Convert.ToInt32(Commands[Index][2]);
-                                    Index--; // Um das am Ende zu neutralisieren
-                                }
-                            }
-                            // Wenn X nicht numerisch ist
-                            else
-                            {
-                                // debug
-                                Console.WriteLine("Result: Y numerisch, X nicht numerisch");
-
-                                if (Jgz(Registers, Commands[Index][1][0]))
-                                {
-                                    Index += Convert.ToInt32(Commands[Index][2]);
-                                    Index--; // Um das am Ende zu neutralisieren
-                                }
-                            }
+                            Continue = Convert.ToInt32(Commands[i][1]) > 0;
                         }
-                        // Wenn Y nicht numerisch ist
                         else
                         {
-                            // Wenn X numerisch ist
-                            if (int.TryParse(Commands[Index][1], out var n5))
-                            {
-                                // debug
-                                Console.WriteLine("Result: Y nicht numerisch, X numerisch");
+                            Continue = Registers[Commands[i][1][0]] > 0;
+                        }
 
-                                if (Convert.ToInt32(Commands[Index][1]) > 0)
-                                {
-                                    Index += Registers[Commands[Index][2][0]];
-                                    Index--; // Um das am Ende zu neutralisieren
-                                }
+                        if (Continue)
+                        {
+                            if (int.TryParse(Commands[i][2], out var n1))
+                            {
+                                i += Convert.ToInt32(Commands[i][2]);
                             }
-                            // Wenn X nicht numerisch ist
                             else
                             {
-                                // debug
-                                Console.WriteLine("Result: Y nicht numerisch, X nicht numerisch");
-
-                                if (Jgz(Registers, Commands[Index][1][0]))
-                                {
-                                    Index += Registers[Commands[Index][2][0]];
-                                    Index--; // Um das am Ende zu neutralisieren
-                                }
+                                i += (int)Registers[Commands[i][2][0]];
                             }
+
+                            i--;
                         }
                         break;
                     default:
-                        throw new Exception("Unknown command: " + Commands[Index][0]);
+                        throw new Exception("Unknown command: " + Commands[i][0]);
                 }
-
-                Index++; // tricky
             }
-
-            // 3675 too high
+            throw new Exception("Es wurde kein Sound gefunden...");
         }
 
 
-        private static void Snd(ref IDictionary<char, int> Registers, char X, ref int LastSound)
+        private static void PrintRegister(IDictionary<char, long> Registers)
         {
-            LastSound = Registers[X];
-        }
-
-
-        private static void Set(ref IDictionary<char, int> Registers, char X, int Y)
-        {
-            Registers[X] = Y;
-        }
-
-        private static void Set(ref IDictionary<char, int> Registers, char X, char Y)
-        {
-            Registers[X] = Registers[Y];
-        }
-
-
-        private static void Add(ref IDictionary<char, int> Registers, char X, int Y)
-        {
-            Registers[X] += Y;
-        }
-
-        private static void Add(ref IDictionary<char, int> Registers, char X, char Y)
-        {
-            Registers[X] += Registers[Y];
-        }
-
-
-        private static void Mul(ref IDictionary<char, int> Registers, char X, int Y)
-        {
-            Registers[X] *= Y;
-        }
-
-        private static void Mul(ref IDictionary<char, int> Registers, char X, char Y)
-        {
-            Registers[X] *= Registers[Y];
-        }
-
-
-        private static void Mod(ref IDictionary<char, int> Registers, char X, int Y)
-        {
-            Registers[X] %= Y;
-        }
-
-        private static void Mod(ref IDictionary<char, int> Registers, char X, char Y)
-        {
-            Registers[X] %= Registers[Y];
-        }
-
-
-        private static void Rcv(ref IDictionary<char, int> Registers, char X, int LastSound)
-        {
-            if (Registers[X] != 0)
+            foreach (var element in Registers)
             {
-                Registers[X] = LastSound;
-                throw new Exception("First Last Sound: " + LastSound);
+                Console.WriteLine(element.Key + ": " + element.Value);
             }
-        }
-
-
-        private static bool Jgz(IDictionary<char, int> Registers, char X)
-        {
-            return Registers[X] > 0;
         }
     }
 }
