@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{CB9AF9DD-7AA5-4BF6-81AE-E27401849CB5}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Day18/Program.cs">
     <Files>
-      <File FileName="Day18/Program.cs" Line="227" Column="1" />
+      <File FileName="Day18/Program.cs" Line="261" Column="29" />
       <File FileName="Day18/Day18.txt" Line="41" Column="10" />
+      <File FileName="Day18/Queue.cs" Line="9" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
