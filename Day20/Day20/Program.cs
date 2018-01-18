@@ -75,6 +75,7 @@ namespace Day20
             }
 
             Console.WriteLine("Closest particle: "+ ClosestIndex);
+			// 161
         }
     }
 }
