@@ -25,6 +25,9 @@ namespace Day21
             // Der Schlüssel ist die Konvertierung
             // Man muss allein aus der Größe die Anzahl an kleineren Vierecken berechnen und dann entsprechend konvertieren
 
+            // Note: 4x4 muss man nicht flippen, es gibt nur maximal 4 Permutationen
+            // 3x3 muss geflippt werden, ergo maximal 8 Permutationen
+
             if (Pattern.Replace("/", "").Length % 2 == 0)
             {
 
@@ -40,9 +43,41 @@ namespace Day21
         }
 
 
-        public static void RemoveSlashes(ref string Pattern)
+        private static void EnhancePattern(ref string Pattern)
         {
-            Pattern.Replace("/", "");
+
+        }
+
+
+        // Immer im Uhrzeigersinn
+        private static void RotatePattern(ref string Pattern)
+        {
+            // von #./.# zu .#/#.
+            char Swap;
+
+            if (Pattern.Length == 5)
+            {
+                //Swap = Pattern[0];
+                //Pattern[0] = Pattern[1];
+                //Pattern[1] = Swap;
+
+                // Geht so nicht
+            }
+            else if (Pattern.Length == 11)
+            {
+
+            }
+            else
+            {
+                throw new Exception("Unmatching length");
+            }
+        }
+
+
+        // Nur für 3 gedacht
+        private static void FlipPattern(ref string Pattern)
+        {
+
         }
     }
 }
