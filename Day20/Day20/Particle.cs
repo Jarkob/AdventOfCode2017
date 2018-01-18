@@ -19,17 +19,17 @@ namespace Day20
             this.Zacc = Zacc;
         }
 
-        public int Xpos {get; set;}
-        public int Ypos {get; set;}
-        public int Zpos {get; set;}
+        public int Xpos { get; set; }
+        public int Ypos { get; set; }
+        public int Zpos { get; set; }
 
-        public int Xvel {get; set;}
-        public int Yvel {get; set;}
-        public int Zvel {get; set;}
+        public int Xvel { get; set; }
+        public int Yvel { get; set; }
+        public int Zvel { get; set; }
 
-        public int Xacc {get; set;}
-        public int Yacc {get; set;}
-        public int Zacc {get; set;}
+        public int Xacc { get; set; }
+        public int Yacc { get; set; }
+        public int Zacc { get; set; }
 
 
         public void Update()
