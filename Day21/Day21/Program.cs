@@ -1,24 +1,40 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 
 namespace Day21
 {
-    // Unfinished
     class MainClass
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string[] Rules = File.ReadAllLines("../../Day21.txt");
+
+            string[][] FormattedRules = new string[Rules.Length][];
+
+            for (int i = 0; i < Rules.Length; i++)
+            {
+                FormattedRules[i] = Rules[i].Split('>');
+                FormattedRules[i][0] = FormattedRules[i][0].Replace(" =", "");
+                FormattedRules[i][1] = FormattedRules[i][1].Replace(" ", "");
+            }
+
+
             string Pattern = ".#./..#/###";
 
+            // Der Schlüssel ist die Konvertierung
+            // Man muss allein aus der Größe die Anzahl an kleineren Vierecken berechnen und dann entsprechend konvertieren
 
-            Pattern = Pattern.Replace("/", "");
+            if (Pattern.Replace("/", "").Length % 2 == 0)
+            {
 
-            if(Pattern.Length % 2 == 0) {
-                
-            } else if(Pattern.Length % 3 == 0) {
-                
-            } else {
+            }
+            else if (Pattern.Replace("/", "").Length % 3 == 0)
+            {
+
+            }
+            else
+            {
                 throw new Exception("We have a problem");
             }
         }
@@ -27,18 +43,6 @@ namespace Day21
         public static void RemoveSlashes(ref string Pattern)
         {
             Pattern.Replace("/", "");
-        }
-
-
-        public static string Increase(string Pattern)
-        {
-            if (Pattern == "../.#") {
-                Pattern = "##./#../...";
-            }
-
-            if(Pattern == ".#./..#/###") {
-                Pattern = "#..#/..../..../#..#";
-            }
         }
     }
 }
