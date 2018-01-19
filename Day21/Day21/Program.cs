@@ -68,9 +68,9 @@ namespace Day21
 
 
         // Nur für 3 gedacht
-        private static void FlipPattern(ref string Pattern)
+        private static string FlipPattern(string Pattern)
         {
-
+			return Pattern[8] +""+ Pattern[9] +""+ Pattern[10] +"/"+ Pattern[4] +""+ Pattern[5] +""+ Pattern[6] +"/"+ Pattern[0] +""+ Pattern[1] +""+ Pattern[2];
         }
     }
 }
