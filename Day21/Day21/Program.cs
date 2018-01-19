@@ -50,22 +50,15 @@ namespace Day21
 
 
         // Immer im Uhrzeigersinn
-        private static void RotatePattern(ref string Pattern)
+        private static string RotatePattern(string Pattern)
         {
-            // von #./.# zu .#/#.
-            char Swap;
-
             if (Pattern.Length == 5)
             {
-                //Swap = Pattern[0];
-                //Pattern[0] = Pattern[1];
-                //Pattern[1] = Swap;
-
-                // Geht so nicht
+		        return Pattern[3] +""+ Pattern[0] +"/"+ Pattern[4] + Pattern[1];
             }
             else if (Pattern.Length == 11)
             {
-
+                return Pattern[8] +""+ Pattern[4] +""+ Pattern[0] +"/"+ Pattern[9] +""+ Pattern[5] +""+ Pattern[1] +"/"+ Pattern[10] +""+ Pattern[6] +""+ Pattern[2];
             }
             else
             {
