@@ -31,6 +31,14 @@ namespace Day21
 
             Console.WriteLine(EnhancePattern(FormattedRules, Pattern));
             PrintPattern(EnhancePattern(FormattedRules, Pattern));
+
+            // Test
+            Pattern = "####/..../####/....";
+            string[] Patterns = SplitPattern(Pattern);
+            foreach (var element in Patterns)
+            {
+                Console.WriteLine(element);
+            }
         }
 
 
@@ -122,12 +130,32 @@ namespace Day21
         }
 
 
+        /// <summary>
+        /// Splits a 4x4 pattern into 4 2x2 patterns
+        /// </summary>
+        /// <returns>An array of 2x2 patterns</returns>
+        /// <param name="Pattern">Pattern.</param>
+        private static string[] SplitPattern(string Pattern)
+        {
+            string[] Patterns = new string[4];
+            Patterns[0] = Pattern[0] + "" + Pattern[1] + "/" + Pattern[5] + "" + Pattern[6];
+            Patterns[1] = Pattern[2] + "" + Pattern[3] + "/" + Pattern[7] + "" + Pattern[8];
+            Patterns[2] = Pattern[10] + "" + Pattern[11] + "/" + Pattern[15] + "" + Pattern[16];
+            Patterns[3] = Pattern[12] + "" + Pattern[13] + "/" + Pattern[17] + "" + Pattern[18];
+            return Patterns;
+        }
+
+
         private static void PrintPattern(string Pattern)
         {
-            foreach(var element in Pattern) {
-                if(element == '/') {
+            foreach (var element in Pattern)
+            {
+                if (element == '/')
+                {
                     Console.WriteLine();
-                } else {
+                }
+                else
+                {
                     Console.Write(element);
                 }
             }
