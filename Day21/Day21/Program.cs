@@ -31,14 +31,6 @@ namespace Day21
 
             Console.WriteLine(EnhancePattern(FormattedRules, Pattern));
             PrintPattern(EnhancePattern(FormattedRules, Pattern));
-
-            // Test
-            Pattern = "####/..../####/....";
-            string[] Patterns = SplitPattern(Pattern);
-            foreach (var element in Patterns)
-            {
-                Console.WriteLine(element);
-            }
         }
 
 
@@ -143,6 +135,33 @@ namespace Day21
             Patterns[2] = Pattern[10] + "" + Pattern[11] + "/" + Pattern[15] + "" + Pattern[16];
             Patterns[3] = Pattern[12] + "" + Pattern[13] + "/" + Pattern[17] + "" + Pattern[18];
             return Patterns;
+        }
+
+
+        /// <summary>
+        /// Splits the whole pattern into smaller patterns
+        /// </summary>
+        /// <returns>The splitted patterns.</returns>
+        /// <param name="Patterns">The whole pattern as an array.</param>
+        private static string[] SplitPattern(string[] Patterns)
+        {
+            int Length = 0;
+            foreach (var Pattern in Patterns)
+            {
+                Length += Pattern.Length == 5 ? 2 : 3;
+            }
+            // Länge von allen und jetzt Rettich ziehen
+            Length = (int)Math.Sqrt(Length);
+
+            // Die Patterns müssen irgendwie im Quadrat angeordnet werden
+            if (Length % 2 == 0)
+            {
+                // Irgendwie über alle iterieren mit Länge und Riesendoppelarray erstellen
+            }
+            else
+            {
+
+            }
         }
 
 
