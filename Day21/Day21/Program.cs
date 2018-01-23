@@ -145,18 +145,21 @@ namespace Day21
         /// <param name="Patterns">The whole pattern as an array.</param>
         private static string[] SplitPattern(string[] Patterns)
         {
-            int Length = 0;
-            foreach (var Pattern in Patterns)
-            {
-                Length += Pattern.Length == 5 ? 2 : 3;
-            }
-            // Länge von allen und jetzt Rettich ziehen
-            Length = (int)Math.Sqrt(Length);
+            int PatternLength = Patterns[0].Length == 5 ? 2 : 3;
+            int Length = (int)Math.Sqrt(Patterns.Length);
+            int SideLength = Length * PatternLength;
 
             // Die Patterns müssen irgendwie im Quadrat angeordnet werden
-            if (Length % 2 == 0)
+            if (SideLength % 2 == 0)
             {
                 // Irgendwie über alle iterieren mit Länge und Riesendoppelarray erstellen
+                string[][] NewPatterns = new string[SideLength][];
+
+                // Erste Reihe ausfüllen
+                for (int i = 0; i < NewPatterns.Length; i++)
+                {
+                    // Keine Ahnung
+                }
             }
             else
             {
