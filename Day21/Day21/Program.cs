@@ -166,6 +166,60 @@ namespace Day21
 
             }
         }
+        
+        
+        private static string MergePattern(string[] Patterns)
+        {
+            int PatternLength = Patterns[0].Length == 5 ? 2 : 3;
+            int Length = (int)Math.Sqrt(Patterns.Length);
+            int SideLength = Length * PatternLength;
+
+            string Pattern = "";
+
+            // Die Patterns müssen irgendwie im Quadrat angeordnet werden
+            // Dazu ist es sinnvoll sie zuerst im Quadrat anzuordnen (evtl.)
+            int PatternsIndex = 0;
+            string[][] NewPatterns = new string[Length][];
+
+            for(int i = 0; i < NewPatterns.Length; i++)
+            {
+                NewPatterns[i] = new string[Length];
+
+                for(int j = 0; j < NewPatterns[i].Length; j++)
+                {
+                    NewPatterns[i][j] = Patterns[PatternsIndex];
+                    PatternsIndex++;
+                }
+            }
+            // Das funktioniert schon mal
+
+            string NewPattern = "";
+
+            if(PatternLength == 2)
+            {
+                for(int i = 0; i < Length; i++)
+                {
+                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    {
+                        NewPattern += NewPatterns[i][j].Substring(0, 2);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    {
+                        NewPattern += NewPatterns[i][k].Substring(3);
+                    }
+
+                    NewPattern += "/";
+                }
+            }
+
+            // Am Ende das letzte Zeichen wegnehmen
+            NewPattern = NewPattern.Remove(NewPattern.Length - 1);
+
+            return NewPattern;
+        }
 
 
         private static void PrintPattern(string Pattern)
