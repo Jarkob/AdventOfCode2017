@@ -19,15 +19,16 @@ namespace Day21
                 FormattedRules[i][1] = FormattedRules[i][1].Replace(" ", "");
             }
 
+            // Also erst Mergen
+            // dann splitten
+            // dann alle enhancen
+            // dann mergen
+
 
             string Pattern = ".#./..#/###";
             Pattern = ".../.../...";
 
-            // Der Schlüssel ist die Konvertierung
-            // Man muss allein aus der Größe die Anzahl an kleineren Vierecken berechnen und dann entsprechend konvertieren
 
-            // Note: 4x4 muss man nicht flippen, es gibt nur maximal 4 Permutationen
-            // 3x3 muss geflippt werden, ergo maximal 8 Permutationen
 
             Console.WriteLine(EnhancePattern(FormattedRules, Pattern));
             PrintPattern(EnhancePattern(FormattedRules, Pattern));
@@ -153,14 +154,30 @@ namespace Day21
         /// </summary>
         /// <returns>An array of 2x2 patterns</returns>
         /// <param name="Pattern">Pattern.</param>
+        //private static string[] SplitPattern(string Pattern)
+        //{
+        //    string[] Patterns = new string[4];
+        //    Patterns[0] = Pattern[0] + "" + Pattern[1] + "/" + Pattern[5] + "" + Pattern[6];
+        //    Patterns[1] = Pattern[2] + "" + Pattern[3] + "/" + Pattern[7] + "" + Pattern[8];
+        //    Patterns[2] = Pattern[10] + "" + Pattern[11] + "/" + Pattern[15] + "" + Pattern[16];
+        //    Patterns[3] = Pattern[12] + "" + Pattern[13] + "/" + Pattern[17] + "" + Pattern[18];
+        //    return Patterns;
+        //}
+
+
         private static string[] SplitPattern(string Pattern)
         {
-            string[] Patterns = new string[4];
-            Patterns[0] = Pattern[0] + "" + Pattern[1] + "/" + Pattern[5] + "" + Pattern[6];
-            Patterns[1] = Pattern[2] + "" + Pattern[3] + "/" + Pattern[7] + "" + Pattern[8];
-            Patterns[2] = Pattern[10] + "" + Pattern[11] + "/" + Pattern[15] + "" + Pattern[16];
-            Patterns[3] = Pattern[12] + "" + Pattern[13] + "/" + Pattern[17] + "" + Pattern[18];
-            return Patterns;
+            int Length = Pattern.Split('/')[0].Length;
+
+            if(Length % 2 == 0) {
+                
+            } else if(Length % 3 == 0){
+                
+            } else {
+                throw new Exception("Unknown length");
+            }
+
+            return null;
         }
 
 
