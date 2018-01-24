@@ -170,7 +170,22 @@ namespace Day21
         
         private static string MergePattern(string[] Patterns)
         {
-            int PatternLength = Patterns[0].Length == 5 ? 2 : 3;
+            int PatternLength = 0;
+            switch(Patterns[0].Length)
+            {
+                case 5:
+                    PatternLength = 2;
+                break;
+                case 11:
+                    PatternLength = 3;
+                break;
+                case 19:
+                    PatternLength = 4;
+                break;
+                default:
+                throw new Exception("Unknown Length");
+
+            }
             int Length = (int)Math.Sqrt(Patterns.Length);
             int SideLength = Length * PatternLength;
 
@@ -213,6 +228,62 @@ namespace Day21
 
                     NewPattern += "/";
                 }
+            } else if(PatternLength == 3)
+            {
+                for(int i = 0; i < Length; i++)
+                {
+                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    {
+                        NewPattern += NewPatterns[i][j].Substring(0, 3);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    {
+                        NewPattern += NewPatterns[i][k].Substring(4, 3);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int l = 0; l < NewPatterns[i].Length; l++)
+                    {
+                        NewPattern += NewPatterns[i][l].Substring(7);
+                    }
+
+                    NewPattern += "/";
+                }
+            } else {
+                for(int i = 0; i < Length; i++)
+                {
+                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    {
+                        NewPattern += NewPatterns[i][j].Substring(0, 4);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    {
+                        NewPattern += NewPatterns[i][k].Substring(5, 4);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int l = 0; l < NewPatterns[i].Length; l++)
+                    {
+                        NewPattern += NewPatterns[i][l].Substring(9, 4);
+                    }
+
+                    NewPattern += "/";
+
+                    for(int m = 0; m < NewPatterns[i].Length; m++)
+                    {
+                        NewPattern += NewPatterns[i][m].Substring(13);
+                    }
+
+                    NewPattern += "/";
+                }
             }
 
             // Am Ende das letzte Zeichen wegnehmen
@@ -220,7 +291,6 @@ namespace Day21
 
             return NewPattern;
         }
-
 
         private static void PrintPattern(string Pattern)
         {
