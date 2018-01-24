@@ -31,6 +31,32 @@ namespace Day21
 
             Console.WriteLine(EnhancePattern(FormattedRules, Pattern));
             PrintPattern(EnhancePattern(FormattedRules, Pattern));
+
+            // Test
+            Console.WriteLine("Weitere Tests:");
+            string[] Patterns = new string[]
+            {
+                "../.#",
+                "../#.",
+                "../##",
+                ".#/..",
+            };
+
+            Patterns = null;
+            Patterns = new string[]
+            {
+                ".../.../...",
+                "..#/..#/..#",
+                ".#./.#./.#.",
+                ".##/.##/.##",
+                "#../#../#..",
+                "#.#/#.#/#.#",
+                "##./##./##.",
+                "###/###/###",
+                ".../.../..."
+            };
+
+            Console.WriteLine(MergePattern(Patterns));
         }
 
 
@@ -165,42 +191,44 @@ namespace Day21
             {
 
             }
+
+            return null;
         }
-        
-        
+
+
         private static string MergePattern(string[] Patterns)
         {
             int PatternLength = 0;
-            switch(Patterns[0].Length)
+            switch (Patterns[0].Length)
             {
                 case 5:
                     PatternLength = 2;
-                break;
+                    break;
                 case 11:
                     PatternLength = 3;
-                break;
+                    break;
                 case 19:
                     PatternLength = 4;
-                break;
+                    break;
                 default:
-                throw new Exception("Unknown Length");
+                    throw new Exception("Unknown Length");
 
             }
             int Length = (int)Math.Sqrt(Patterns.Length);
             int SideLength = Length * PatternLength;
 
-            string Pattern = "";
+            //string Pattern = "";
 
             // Die Patterns müssen irgendwie im Quadrat angeordnet werden
             // Dazu ist es sinnvoll sie zuerst im Quadrat anzuordnen (evtl.)
             int PatternsIndex = 0;
             string[][] NewPatterns = new string[Length][];
 
-            for(int i = 0; i < NewPatterns.Length; i++)
+            for (int i = 0; i < NewPatterns.Length; i++)
             {
                 NewPatterns[i] = new string[Length];
 
-                for(int j = 0; j < NewPatterns[i].Length; j++)
+                for (int j = 0; j < NewPatterns[i].Length; j++)
                 {
                     NewPatterns[i][j] = Patterns[PatternsIndex];
                     PatternsIndex++;
@@ -210,76 +238,79 @@ namespace Day21
 
             string NewPattern = "";
 
-            if(PatternLength == 2)
+            if (PatternLength == 2)
             {
-                for(int i = 0; i < Length; i++)
+                for (int i = 0; i < Length; i++)
                 {
-                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    for (int j = 0; j < NewPatterns[i].Length; j++)
                     {
                         NewPattern += NewPatterns[i][j].Substring(0, 2);
                     }
 
                     NewPattern += "/";
 
-                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    for (int k = 0; k < NewPatterns[i].Length; k++)
                     {
                         NewPattern += NewPatterns[i][k].Substring(3);
                     }
 
                     NewPattern += "/";
                 }
-            } else if(PatternLength == 3)
+            }
+            else if (PatternLength == 3)
             {
-                for(int i = 0; i < Length; i++)
+                for (int i = 0; i < Length; i++)
                 {
-                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    for (int j = 0; j < NewPatterns[i].Length; j++)
                     {
                         NewPattern += NewPatterns[i][j].Substring(0, 3);
                     }
 
                     NewPattern += "/";
 
-                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    for (int k = 0; k < NewPatterns[i].Length; k++)
                     {
                         NewPattern += NewPatterns[i][k].Substring(4, 3);
                     }
 
                     NewPattern += "/";
 
-                    for(int l = 0; l < NewPatterns[i].Length; l++)
+                    for (int l = 0; l < NewPatterns[i].Length; l++)
                     {
-                        NewPattern += NewPatterns[i][l].Substring(7);
+                        NewPattern += NewPatterns[i][l].Substring(8);
                     }
 
                     NewPattern += "/";
                 }
-            } else {
-                for(int i = 0; i < Length; i++)
+            }
+            else
+            {
+                for (int i = 0; i < Length; i++)
                 {
-                    for(int j = 0; j < NewPatterns[i].Length; j++)
+                    for (int j = 0; j < NewPatterns[i].Length; j++)
                     {
                         NewPattern += NewPatterns[i][j].Substring(0, 4);
                     }
 
                     NewPattern += "/";
 
-                    for(int k = 0; k < NewPatterns[i].Length; k++)
+                    for (int k = 0; k < NewPatterns[i].Length; k++)
                     {
                         NewPattern += NewPatterns[i][k].Substring(5, 4);
                     }
 
                     NewPattern += "/";
 
-                    for(int l = 0; l < NewPatterns[i].Length; l++)
+                    for (int l = 0; l < NewPatterns[i].Length; l++)
                     {
-                        NewPattern += NewPatterns[i][l].Substring(9, 4);
+                        NewPattern += NewPatterns[i][l].Substring(10, 4);
                     }
 
                     NewPattern += "/";
 
-                    for(int m = 0; m < NewPatterns[i].Length; m++)
+                    for (int m = 0; m < NewPatterns[i].Length; m++)
                     {
-                        NewPattern += NewPatterns[i][m].Substring(13);
+                        NewPattern += NewPatterns[i][m].Substring(15);
                     }
 
                     NewPattern += "/";
