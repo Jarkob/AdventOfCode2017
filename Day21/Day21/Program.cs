@@ -167,17 +167,39 @@ namespace Day21
 
         private static string[] SplitPattern(string Pattern)
         {
-            int Length = Pattern.Split('/')[0].Length;
+            string[] FormattedPattern = Pattern.Split('/');
+            int Length = FormattedPattern.Length;
+
+            List<string> NewPatterns = new List<string>();
 
             if(Length % 2 == 0) {
-                
+                // Split into 2x2 Patterns
+                for(int i = 0; i < Length; i += 2)
+                {
+                    // Erste und zweite Reihe hinzufügen
+                    for(int j = 0; j < Length; j += 2)
+                    {
+                        NewPatterns.Add(FormattedPattern[i][j] +""+ FormattedPattern[i][j + 1] +"/"+ FormattedPattern[i + 1][j] +""+ FormattedPattern[i + 1][j + 1]);
+                    }
+                }
             } else if(Length % 3 == 0){
-                
+                // Split into 3x3 Patterns
+                for(int i = 0; i < Length; i += 3)
+                {
+                    for(int j = 0; j < Length; j+= 3)
+                    {
+                        NewPatterns.Add(
+                            FormattedPattern[i][j] +""+ FormattedPattern[i][j + 1] +""+ FormattedPattern[i][j + 2] +"/"+
+                            FormattedPattern[i + 1][j] +""+ FormattedPattern[i + 1][j + 1] +""+ FormattedPattern[i + 1][j + 2] +"/"+
+                            FormattedPattern[i + 2][j] +""+ FormattedPattern[i + 2][j + 1] +""+ FormattedPattern[i + 2][j + 2]
+                        );
+                    }
+                }
             } else {
                 throw new Exception("Unknown length");
             }
 
-            return null;
+            return NewPatterns.ToArray();
         }
 
 
