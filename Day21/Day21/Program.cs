@@ -377,5 +377,18 @@ namespace Day21
             }
             Console.WriteLine();
         }
+        
+        private static int GetOn(string Pattern)
+        {
+            int On = 0;
+            foreach(var element in Pattern)
+            {
+                if(element == '#')
+                {
+                    On++;
+                }
+            }
+            return On;
+        }
     }
 }
