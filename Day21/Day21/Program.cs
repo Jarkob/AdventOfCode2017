@@ -26,38 +26,23 @@ namespace Day21
 
 
             string Pattern = ".#./..#/###";
-            Pattern = ".../.../...";
-
-
-
-            Console.WriteLine(EnhancePattern(FormattedRules, Pattern));
-            PrintPattern(EnhancePattern(FormattedRules, Pattern));
-
-            // Test
-            Console.WriteLine("Weitere Tests:");
-            string[] Patterns = new string[]
-            {
-                "../.#",
-                "../#.",
-                "../##",
-                ".#/..",
-            };
-
-            Patterns = null;
-            Patterns = new string[]
-            {
-                ".../.../...",
-                "..#/..#/..#",
-                ".#./.#./.#.",
-                ".##/.##/.##",
-                "#../#../#..",
-                "#.#/#.#/#.#",
-                "##./##./##.",
-                "###/###/###",
-                ".../.../..."
-            };
-
-            Console.WriteLine(MergePattern(Patterns));
+			string[] Patterns = new string[]{Pattern};
+            
+			for(int i = 0; i < 5; i++)
+			{
+				Patterns = SplitPattern(Pattern);
+				
+				for(int j = 0; j < Patterns.Length; j++)
+				{
+					Patterns[j] = EnhancePattern(FormattedRules, Patterns[j]);
+				}
+				
+				Pattern = MergePattern(Patterns);
+			}
+		
+			int Count = GetOn(Pattern);
+			Console.WriteLine(Count);
+            // 205
         }
 
 
