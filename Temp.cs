@@ -56,12 +56,14 @@ public class Program
 		
 		Virus Test = new Virus(Grid);
 		
-		for(int j = 0; j < 70; j++)
+		for(int j = 0; j < 10000; j++)
 		{
 			Test.Burst();
 		}
 		
 		Test.Print();
+		
+		Console.Write("Amount of Infections: "+ Test.Infections);
 	}
 }
 
@@ -74,7 +76,11 @@ public class Virus
 		// Für Test
 		this.X = 4;
 		this.Y = 4;
+		
+		this.Infections = 0;
 	}
+	
+	public int Infections {get; set;}
 	
 	public int X {get; set;}
 	public int Y {get; set;}
@@ -127,16 +133,18 @@ public class Virus
 			}
 			
 			this.Grid[Y][X] = '#';
+			
+			this.Infections++;
 		}
 		
 		// Move
 		switch(this.Direction)
 		{
 			case "up":
-				this.Y++;
+				this.Y--;
 				break;
 			case "down":
-				this.Y--;
+				this.Y++;
 				break;
 			case "left":
 				this.X--;
