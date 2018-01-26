@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{00CEC0E5-DFEC-4336-894E-B7819FFDE833}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Day22/Virus.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Day22/Day22.txt">
     <Files>
-      <File FileName="Day22/Program.cs" Line="49" Column="54" />
+      <File FileName="Day22/Program.cs" Line="24" Column="17" />
       <File FileName="Day22/Virus.cs" Line="27" Column="1" />
+      <File FileName="Day22/Day22.txt" Line="1" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
