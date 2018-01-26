@@ -26,23 +26,26 @@ namespace Day21
 
 
             string Pattern = ".#./..#/###";
-			string[] Patterns = new string[]{Pattern};
-            
-			for(int i = 0; i < 5; i++)
-			{
-				Patterns = SplitPattern(Pattern);
-				
-				for(int j = 0; j < Patterns.Length; j++)
-				{
-					Patterns[j] = EnhancePattern(FormattedRules, Patterns[j]);
-				}
-				
-				Pattern = MergePattern(Patterns);
-			}
-		
-			int Count = GetOn(Pattern);
-			Console.WriteLine(Count);
-            // 205
+            string[] Patterns = new string[] { Pattern };
+
+            for (int i = 0; i < 18; i++)
+            {
+                Console.WriteLine("i = {0}; Patterns.Length = {1}; Pattern.Length = {2}", i, Patterns.Length, Pattern.Length);
+                Console.WriteLine("on: "+ GetOn(Pattern));
+                Patterns = SplitPattern(Pattern);
+
+                for (int j = 0; j < Patterns.Length; j++)
+                {
+                    Patterns[j] = EnhancePattern(FormattedRules, Patterns[j]);
+                }
+
+                Pattern = MergePattern(Patterns);
+            }
+
+            int Count = GetOn(Pattern);
+            Console.WriteLine(Count);
+            // Part1 205
+            // Part2 3389823
         }
 
 
@@ -134,22 +137,6 @@ namespace Day21
         }
 
 
-        /// <summary>
-        /// Splits a 4x4 pattern into 4 2x2 patterns
-        /// </summary>
-        /// <returns>An array of 2x2 patterns</returns>
-        /// <param name="Pattern">Pattern.</param>
-        //private static string[] SplitPattern(string Pattern)
-        //{
-        //    string[] Patterns = new string[4];
-        //    Patterns[0] = Pattern[0] + "" + Pattern[1] + "/" + Pattern[5] + "" + Pattern[6];
-        //    Patterns[1] = Pattern[2] + "" + Pattern[3] + "/" + Pattern[7] + "" + Pattern[8];
-        //    Patterns[2] = Pattern[10] + "" + Pattern[11] + "/" + Pattern[15] + "" + Pattern[16];
-        //    Patterns[3] = Pattern[12] + "" + Pattern[13] + "/" + Pattern[17] + "" + Pattern[18];
-        //    return Patterns;
-        //}
-
-
         private static string[] SplitPattern(string Pattern)
         {
             string[] FormattedPattern = Pattern.Split('/');
@@ -157,66 +144,39 @@ namespace Day21
 
             List<string> NewPatterns = new List<string>();
 
-            if(Length % 2 == 0) {
+            if (Length % 2 == 0)
+            {
                 // Split into 2x2 Patterns
-                for(int i = 0; i < Length; i += 2)
+                for (int i = 0; i < Length; i += 2)
                 {
                     // Erste und zweite Reihe hinzufügen
-                    for(int j = 0; j < Length; j += 2)
+                    for (int j = 0; j < Length; j += 2)
                     {
-                        NewPatterns.Add(FormattedPattern[i][j] +""+ FormattedPattern[i][j + 1] +"/"+ FormattedPattern[i + 1][j] +""+ FormattedPattern[i + 1][j + 1]);
+                        NewPatterns.Add(FormattedPattern[i][j] + "" + FormattedPattern[i][j + 1] + "/" + FormattedPattern[i + 1][j] + "" + FormattedPattern[i + 1][j + 1]);
                     }
                 }
-            } else if(Length % 3 == 0){
+            }
+            else if (Length % 3 == 0)
+            {
                 // Split into 3x3 Patterns
-                for(int i = 0; i < Length; i += 3)
+                for (int i = 0; i < Length; i += 3)
                 {
-                    for(int j = 0; j < Length; j+= 3)
+                    for (int j = 0; j < Length; j += 3)
                     {
                         NewPatterns.Add(
-                            FormattedPattern[i][j] +""+ FormattedPattern[i][j + 1] +""+ FormattedPattern[i][j + 2] +"/"+
-                            FormattedPattern[i + 1][j] +""+ FormattedPattern[i + 1][j + 1] +""+ FormattedPattern[i + 1][j + 2] +"/"+
-                            FormattedPattern[i + 2][j] +""+ FormattedPattern[i + 2][j + 1] +""+ FormattedPattern[i + 2][j + 2]
+                            FormattedPattern[i][j] + "" + FormattedPattern[i][j + 1] + "" + FormattedPattern[i][j + 2] + "/" +
+                            FormattedPattern[i + 1][j] + "" + FormattedPattern[i + 1][j + 1] + "" + FormattedPattern[i + 1][j + 2] + "/" +
+                            FormattedPattern[i + 2][j] + "" + FormattedPattern[i + 2][j + 1] + "" + FormattedPattern[i + 2][j + 2]
                         );
                     }
-                }
-            } else {
-                throw new Exception("Unknown length");
-            }
-
-            return NewPatterns.ToArray();
-        }
-
-
-        /// <summary>
-        /// Splits the whole pattern into smaller patterns
-        /// </summary>
-        /// <returns>The splitted patterns.</returns>
-        /// <param name="Patterns">The whole pattern as an array.</param>
-        private static string[] SplitPattern(string[] Patterns)
-        {
-            int PatternLength = Patterns[0].Length == 5 ? 2 : 3;
-            int Length = (int)Math.Sqrt(Patterns.Length);
-            int SideLength = Length * PatternLength;
-
-            // Die Patterns müssen irgendwie im Quadrat angeordnet werden
-            if (SideLength % 2 == 0)
-            {
-                // Irgendwie über alle iterieren mit Länge und Riesendoppelarray erstellen
-                string[][] NewPatterns = new string[SideLength][];
-
-                // Erste Reihe ausfüllen
-                for (int i = 0; i < NewPatterns.Length; i++)
-                {
-                    // Keine Ahnung
                 }
             }
             else
             {
-
+                throw new Exception("Unknown length");
             }
 
-            return null;
+            return NewPatterns.ToArray();
         }
 
 
@@ -362,13 +322,13 @@ namespace Day21
             }
             Console.WriteLine();
         }
-        
+
         private static int GetOn(string Pattern)
         {
             int On = 0;
-            foreach(var element in Pattern)
+            foreach (var element in Pattern)
             {
-                if(element == '#')
+                if (element == '#')
                 {
                     On++;
                 }
