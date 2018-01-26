@@ -3,13 +3,13 @@ namespace Day22
 {
     public class Virus
     {
-        public Virus(char[][] Grid)
+        public Virus(char[][] Grid, int X, int Y)
         {
             this.Grid = Grid;
 
             // Für Test
-            this.X = 4;
-            this.Y = 4;
+            this.X = X;
+            this.Y = Y;
 
             this.Infections = 0;
         }
