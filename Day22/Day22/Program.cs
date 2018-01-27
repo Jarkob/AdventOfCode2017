@@ -56,7 +56,7 @@ namespace Day22
                 // Hier ist ein Problem
                 for (int l = Half; l < Half + Input.Length; l++)
                 {
-                    NewInput[i][l] = Input[i][i - l];
+                    NewInput[i][l] = Input[i - Half][l - Half];
                 }
 
                 for (int k = 0; k < Half; k++)
