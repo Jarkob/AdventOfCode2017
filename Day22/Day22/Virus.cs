@@ -24,6 +24,11 @@ namespace Day22
 
         public void Burst()
         {
+            if(this.Grid[Y][X] == ' ')
+            {
+                this.Grid[Y][X] = '.';
+            }
+
             if (this.Grid[Y][X] == '#')
             {
                 switch (this.Direction)
