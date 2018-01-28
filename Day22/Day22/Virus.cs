@@ -168,9 +168,11 @@ namespace Day22
 
                 this.Grid[Y][X] = '#';
                 this.Infections++;
-            } else { // Flagged
+            }
+            else
+            { // Flagged
                 // Reverse direction
-                switch(this.Direction)
+                switch (this.Direction)
                 {
                     case "up":
                         this.Direction = "down";
@@ -218,15 +220,18 @@ namespace Day22
         {
             for (int i = 0; i < this.Grid.Length; i++)
             {
-                for (int j = 0; j < this.Grid[i].Length; j++)
+                if (this.Grid[i] != null)
                 {
-                    if (i != this.Y || j != this.X)
+                    for (int j = 0; j < this.Grid[i].Length; j++)
                     {
-                        Console.Write(this.Grid[i][j]);
-                    }
-                    else
-                    {
-                        Console.Write("O");
+                        if (i != this.Y || j != this.X)
+                        {
+                            Console.Write(this.Grid[i][j]);
+                        }
+                        else
+                        {
+                            Console.Write("O");
+                        }
                     }
                 }
                 Console.WriteLine();
