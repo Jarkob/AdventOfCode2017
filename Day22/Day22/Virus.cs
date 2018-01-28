@@ -22,9 +22,15 @@ namespace Day22
 
         public char[][] Grid { get; set; }
 
-        public void Burst()
+
+        public void Burst1()
         {
-            if(this.Grid[Y][X] == ' ')
+            if (this.Grid[Y] == null)
+            {
+                this.Grid[Y] = new char[this.Grid.Length];
+            }
+
+            if (this.Grid[Y][X] == ' ')
             {
                 this.Grid[Y][X] = '.';
             }
@@ -98,6 +104,116 @@ namespace Day22
             }
         }
 
+
+        public void Burst2()
+        {
+            if (this.Grid[Y] == null)
+            {
+                this.Grid[Y] = new char[this.Grid.Length];
+            }
+
+            if (this.Grid[Y][X] == ' ')
+            {
+                this.Grid[Y][X] = '.';
+            }
+
+            if (this.Grid[Y][X] == '#')
+            {
+                switch (this.Direction)
+                {
+                    case "up":
+                        this.Direction = "right";
+                        break;
+                    case "down":
+                        this.Direction = "left";
+                        break;
+                    case "left":
+                        this.Direction = "up";
+                        break;
+                    case "right":
+                        this.Direction = "down";
+                        break;
+                    default:
+                        this.Direction = "right";
+                        break;
+                }
+
+                this.Grid[Y][X] = 'F';
+            }
+            else if (this.Grid[Y][X] == '.')
+            {
+                switch (this.Direction)
+                {
+                    case "up":
+                        this.Direction = "left";
+                        break;
+                    case "down":
+                        this.Direction = "right";
+                        break;
+                    case "left":
+                        this.Direction = "down";
+                        break;
+                    case "right":
+                        this.Direction = "up";
+                        break;
+                    default:
+                        this.Direction = "left";
+                        break;
+                }
+
+                this.Grid[Y][X] = 'W';
+            }
+            else if (this.Grid[Y][X] == 'W')
+            {
+
+                this.Grid[Y][X] = '#';
+                this.Infections++;
+            } else { // Flagged
+                // Reverse direction
+                switch(this.Direction)
+                {
+                    case "up":
+                        this.Direction = "down";
+                        break;
+                    case "down":
+                        this.Direction = "up";
+                        break;
+                    case "left":
+                        this.Direction = "right";
+                        break;
+                    case "right":
+                        this.Direction = "left";
+                        break;
+                    default:
+                        this.Direction = "down";
+                        break;
+                }
+
+                this.Grid[Y][X] = '.';
+            }
+
+            // Move
+            switch (this.Direction)
+            {
+                case "up":
+                    this.Y--;
+                    break;
+                case "down":
+                    this.Y++;
+                    break;
+                case "left":
+                    this.X--;
+                    break;
+                case "right":
+                    this.X++;
+                    break;
+                default:
+                    throw new Exception("No direction");
+            }
+        }
+
+
+        // Funktioniert nicht mehr
         public void Print()
         {
             for (int i = 0; i < this.Grid.Length; i++)
