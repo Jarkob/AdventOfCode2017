@@ -1,11 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Day22
 {
     class MainClass
     {
         public static void Main()
+        {
+            Version2();
+        }
+
+
+        public static void Version1()
         {
             string[] Input = File.ReadAllLines("../../Day22.txt");
 
@@ -86,6 +93,24 @@ namespace Day22
             // 3204753 too high
             // 3454 too low
             // 1420046 too low
+        }
+
+
+        public static void Version2()
+        {
+            string[] Input = File.ReadAllLines("../../Day22.txt");
+
+            IDictionary<(int, int), char> Grid = new Dictionary<(int, int), char>();
+
+            for (int i = 0; i < Input.Length; i++)
+            {
+                for (int j = 0; j < Input[j].Length; j++)
+                {
+                    Grid.Add((i, j), Input[i][j]);
+                }
+            }
+
+
         }
     }
 }
