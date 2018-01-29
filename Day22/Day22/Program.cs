@@ -100,17 +100,120 @@ namespace Day22
         {
             string[] Input = File.ReadAllLines("../../Day22.txt");
 
+            // Test
+            Input = null;
+
+            Input = new string[]
+            {
+            ".........",
+            ".........",
+            ".........",
+            ".....#...",
+            "...#.....",
+            ".........",
+            ".........",
+            "........."
+            };
+
             IDictionary<(int, int), char> Grid = new Dictionary<(int, int), char>();
 
             for (int i = 0; i < Input.Length; i++)
             {
-                for (int j = 0; j < Input[j].Length; j++)
+                for (int j = 0; j < Input[i].Length; j++)
                 {
-                    Grid.Add((i, j), Input[i][j]);
+                    Grid.Add((j, i), Input[i][j]);
                 }
             }
 
+            // Jetzt moven
+            int X = Input[0].Length / 2;
+            int Y = Input.Length / 2;
+            string Direction = "up";
 
+            int Infections = 0;
+
+            // Test
+            X += 100;
+            Y += 100;
+
+            for (int i = 0; i < 70; i++)
+            {
+                if (!Grid.ContainsKey((X, Y)))
+                {
+                    Grid.Add((X, Y), '.');
+                }
+
+                switch (Grid[(X, Y)])
+                {
+                    case '#':
+                        switch (Direction)
+                        {
+                            case "up":
+                                Direction = "right";
+                                break;
+                            case "down":
+                                Direction = "left";
+                                break;
+                            case "left":
+                                Direction = "up";
+                                break;
+                            case "right":
+                                Direction = "down";
+                                break;
+                            default:
+                                throw new Exception("Unknown direction");
+                        }
+
+                        Grid[(X, Y)] = '.';
+                        break;
+                    case '.':
+                        switch(Direction)
+                        {
+                            case "up":
+                                Direction = "left";
+                                break;
+                            case "down":
+                                Direction = "right";
+                                break;
+                            case "left":
+                                Direction = "down";
+                                break;
+                            case "right":
+                                Direction = "up";
+                                break;
+                            default:
+                                throw new Exception("Unknown direction");
+                        }
+
+                        Infections++;
+
+                        Grid[(X, Y)] = '#';
+                        break;
+                    default:
+                        throw new Exception("Unknown state");
+                }
+
+                // Moven
+                switch(Direction)
+                {
+                    case "up":
+                        Y--;
+                        break;
+                    case "down":
+                        Y++;
+                        break;
+                    case "left":
+                        X--;
+                        break;
+                    case "right":
+                        X++;
+                        break;
+                    default:
+                        throw new Exception("Unknown direction");
+                }
+            }
+
+            Console.WriteLine("Anzahl Infektionen: "+ Infections);
         }
     }
 }
