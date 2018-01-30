@@ -215,5 +215,13 @@ namespace Day22
 
             Console.WriteLine("Anzahl Infektionen: "+ Infections);
         }
+
+
+        private static void PrintGrid(IDictionary<(int, int), char> Grid)
+        {
+            // Von oben links nach unten rechts
+            // Erst Maximalwerte herausfinden
+            // Keine Ahnung wie man das darstellen soll, TODO
+        }
     }
 }
