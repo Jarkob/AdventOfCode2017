@@ -1,0 +1,5 @@
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day23/Day23/bin/Debug/Day23.exe
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day23/Day23/bin/Debug/Day23.pdb
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day23/Day23/obj/x86/Debug/Day23.csproj.CoreCompileInputs.cache
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day23/Day23/obj/x86/Debug/Day23.exe
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day23/Day23/obj/x86/Debug/Day23.pdb
