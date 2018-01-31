@@ -134,9 +134,50 @@ namespace Day23
 
             int MulInvokes = 0;
 
+            // Test
+            long ChangeA = 0;
+            long ChangeB = 0;
+            long ChangeC = 0;
+            long ChangeD = 0;
+            long ChangeE = 0;
+            long ChangeF = 0;
+            long ChangeG = 0;
+            long ChangeH = 0;
+
+            int Counter = 0;
+
             for (int i = 0; i < Commands.Length; i++)
             {
+                // delter g -1 e -1
+
+                // debug
+                Counter++;
                 Console.WriteLine(i);
+                Console.WriteLine("a: " + ChangeA);
+                Console.WriteLine("b: " + ChangeB);
+                Console.WriteLine("c: " + ChangeC);
+                Console.WriteLine("d: " + ChangeD);
+                Console.WriteLine("e: " + ChangeE);
+                Console.WriteLine("f: " + ChangeF);
+                Console.WriteLine("g: " + ChangeG);
+                Console.WriteLine("h: " + ChangeH);
+
+                if (Counter > 10000)
+                {
+                    Console.ReadLine();
+                    foreach(var element in Registers) {
+                        Console.WriteLine(element.Key +": "+ element.Value);
+                    }
+                }
+
+                ChangeA = Registers['a'];
+                ChangeB = Registers['b'];
+                ChangeC = Registers['c'];
+                ChangeD = Registers['d'];
+                ChangeE = Registers['e'];
+                ChangeF = Registers['f'];
+                ChangeG = Registers['g'];
+                ChangeH = Registers['h'];
 
                 switch (Commands[i][0])
                 {
@@ -202,6 +243,16 @@ namespace Day23
                     default:
                         throw new Exception("Unknown command: " + Commands[i][0]);
                 }
+
+                // debug
+                ChangeA -= Registers['a'];
+                ChangeB -= Registers['b'];
+                ChangeC -= Registers['c'];
+                ChangeD -= Registers['d'];
+                ChangeE -= Registers['e'];
+                ChangeF -= Registers['f'];
+                ChangeG -= Registers['g'];
+                ChangeH -= Registers['h'];
             }
 
             Console.WriteLine("Value of h: " + Registers['h']);
