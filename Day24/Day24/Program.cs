@@ -31,6 +31,30 @@ namespace Day24
             Bridge.Add(Components[StartIndex]);
 
             Console.WriteLine(GetStrength(Bridge));
+
+            // Jetzt alle Kombinationen
+            List<Tuple<int, int>> ComponentList = new List<Tuple<int, int>>(Components);
+            // vielleicht lieber doch nicht
+
+
+            int Index = 0;
+            int Ports = Bridge[Index].Item2;
+
+            Tuple<int, int>[] RestComponents = new Tuple<int, int>[Components.Length - 1];
+            for (int i = 0; i < Components.Length; i++)
+            {
+                if(i != StartIndex) {
+                    RestComponents[i] = Components[i]; // Funktioniert so nicht...
+                }
+            }
+
+            for (int i = 0; i < Components.Length; i++)
+            {
+                if(Components[i].Item1 == Ports)
+                {
+                    
+                }
+            }
         }
 
 
