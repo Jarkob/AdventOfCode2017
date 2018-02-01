@@ -164,7 +164,14 @@ namespace Day23
 
                 if (Counter > 10000)
                 {
-                    Console.ReadLine();
+                    string Interrupt = Console.ReadLine();
+                    if(Interrupt == "exe")
+                    {
+                        i = 11;
+                        Registers['e'] = 0;
+                        Registers['g'] = -106499;
+                    }
+
                     foreach(var element in Registers) {
                         Console.WriteLine(element.Key +": "+ element.Value);
                     }
