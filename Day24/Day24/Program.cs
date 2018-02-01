@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Day24
 {
@@ -24,6 +25,28 @@ namespace Day24
             }
 
             // Alle möglichen Kombinationen ausprobieren, rekursiv
+            // Möglicherweise macht es Sinn die Komponenten als Liste zu behandeln...
+
+            List<Tuple<int, int>> Bridge = new List<Tuple<int, int>>();
+            Bridge.Add(Components[StartIndex]);
+
+            Console.WriteLine(GetStrength(Bridge));
+        }
+
+
+        private static int GetStrength(List<Tuple<int, int>> Bridge)
+        {
+            return GetStrength(Bridge, 0);
+        }
+
+        private static int GetStrength(List<Tuple<int, int>> Bridge, int Index)
+        {
+            if(Index == Bridge.Count - 1)
+            {
+                return Bridge[Index].Item1 + Bridge[Index].Item2;
+            } else {
+                return Bridge[Index].Item1 + Bridge[Index].Item2 + GetStrength(Bridge, Index + 1);
+            }
         }
     }
 }
