@@ -44,7 +44,7 @@ namespace Day24
             for (int i = 0; i < Components.Length; i++)
             {
                 if(i != StartIndex) {
-                    RestComponents[i] = Components[i]; // Funktioniert so nicht...
+                    RestComponents[i] = Components[i]; // Funktioniert so nicht... wieso nicht
                 }
             }
 
