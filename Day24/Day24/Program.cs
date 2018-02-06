@@ -40,13 +40,23 @@ namespace Day24
             int Index = 0;
             int Ports = Bridge[Index].Item2;
 
+            // Restlichen Komponenten getten
             Tuple<int, int>[] RestComponents = new Tuple<int, int>[Components.Length - 1];
             for (int i = 0; i < Components.Length; i++)
             {
                 if(i != StartIndex) {
-                    RestComponents[i] = Components[i]; // Funktioniert so nicht... wieso nicht
+                    RestComponents[i] = Components[i];
+                } else {
+
+                    // Restlichen Elemente hinzufügen
+                    for (int j = i + 1; j < Components.Length; j++) {
+                        RestComponents[j - 1] = Components[j];
+                    }
+
+                    break;
                 }
             }
+
 
             for (int i = 0; i < Components.Length; i++)
             {
@@ -55,6 +65,8 @@ namespace Day24
                     
                 }
             }
+
+            // TODO: Backtracking ansehen!
         }
 
 
