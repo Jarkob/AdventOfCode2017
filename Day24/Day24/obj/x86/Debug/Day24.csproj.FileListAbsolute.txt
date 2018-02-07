@@ -3,3 +3,5 @@
 /Users/jakobbussas/Projects/AdventOfCode/2017/Day24/Day24/obj/x86/Debug/Day24.csproj.CoreCompileInputs.cache
 /Users/jakobbussas/Projects/AdventOfCode/2017/Day24/Day24/obj/x86/Debug/Day24.exe
 /Users/jakobbussas/Projects/AdventOfCode/2017/Day24/Day24/obj/x86/Debug/Day24.pdb
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day24/Day24/bin/Debug/System.ValueTuple.dll
+/Users/jakobbussas/Projects/AdventOfCode/2017/Day24/Day24/bin/Debug/System.ValueTuple.xml

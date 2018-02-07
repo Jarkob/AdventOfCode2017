@@ -8,143 +8,148 @@ namespace Day24
     {
         public static void Main(string[] args)
         {
+            Part1();
+            Part2();
+        }
+
+
+        public static void Part1()
+        {
             string[] Input = File.ReadAllLines("../../Day24.txt");
 
             // Test
-            Input = null;
-            Input = new string[] { "0/2", "2/2", "2/3", "3/4", "3/5", "0/1", "10/1", "9/10" };
+            //Input = null;
+            //Input = new string[] { "0/2", "2/2", "2/3", "3/4", "3/5", "0/1", "10/1", "9/10" };
 
-            Tuple<int, int>[] Components = new Tuple<int, int>[Input.Length];
+            List<(int, int)> Components = new List<(int, int)>();
 
-            for (int i = 0; i < Input.Length; i++)
+            foreach (var element in Input)
             {
-                Components[i] = new Tuple<int, int>(Convert.ToInt32(Input[i].Split('/')[0]), Convert.ToInt32(Input[i].Split('/')[1]));
+                Components.Add((Convert.ToInt32(element.Split('/')[0]), Convert.ToInt32(element.Split('/')[1])));
             }
 
-            // Jetzt gehts los
-            int Result = FindMaxLength(new List<Tuple<int, int>>(Components));
-            Console.WriteLine("Result: " + Result);
+            int StrongestBridge = GetMaxStrength(0, 0, Components);
+            Console.WriteLine("Part1: " + StrongestBridge);
+            // 1511
         }
 
 
-        // Es gibt mehrere Anfangsmöglichkeiten
-        private static int FindMaxLength(List<Tuple<int, int>> ComponentList)
+        public static void Part2()
         {
-            List<int> StartIndices = new List<int>();
-            for (int i = 0; i < ComponentList.Count; i++)
+            string[] Input = File.ReadAllLines("../../Day24.txt");
+
+            // Test
+            //Input = null;
+            //Input = new string[] { "0/2", "2/2", "2/3", "3/4", "3/5", "0/1", "10/1", "9/10" };
+
+            List<(int, int)> Components = new List<(int, int)>();
+
+            foreach (var element in Input)
             {
-                if (ComponentList[i].Item1 == 0)
-                {
-                    StartIndices.Add(i);
-                }
+                Components.Add((Convert.ToInt32(element.Split('/')[0]), Convert.ToInt32(element.Split('/')[1])));
             }
 
-            int Max = -1;
-
-            for (int j = 0; j < StartIndices.Count; j++)
-            {
-                List<Tuple<int, int>> Bridge = new List<Tuple<int, int>>();
-                Bridge.Add(ComponentList[StartIndices[j]]);
-                List<Tuple<int, int>> RemainingComponents = new List<Tuple<int, int>>(ComponentList);
-                RemainingComponents.RemoveAt(StartIndices[j]);
-
-                if(FindMaxLength(Bridge, RemainingComponents, GetStrength(Bridge)) > Max) {
-                    Max = FindMaxLength(Bridge, RemainingComponents, GetStrength(Bridge));
-                }
-            }
-
-            return Max;
+            (int, int) LongestBridge = GetMaxLength((0, 0), 0, Components);
+            Console.WriteLine("Part2: " + LongestBridge.Item1);
+            // 1471
         }
 
-        private static int FindMaxLength(List<Tuple<int, int>> Bridge, List<Tuple<int, int>> ComponentList, int MaxLength)
+
+        private static int GetMaxStrength(int Bridge, int Ports, List<(int, int)> Components)
         {
-            Console.WriteLine("Aufruf von findmaxlength");
-            int Ports = Bridge[Bridge.Count - 1].Item2;
-
-            // Erstmal mögliche Kombinationen raussuchen
-            List<Tuple<int, int>> PossibleFollowers = new List<Tuple<int, int>>();
-            for (int i = 0; i < ComponentList.Count; i++)
+            // Possible Followers getten
+            List<(int, int)> PossibleFollowers = new List<(int, int)>();
+            foreach (var element in Components)
             {
-                if (ComponentList[i].Item1 == Ports)
+                if (element.Item1 == Ports || element.Item2 == Ports)
                 {
-                    PossibleFollowers.Add(new Tuple<int, int>(ComponentList[i].Item1, ComponentList[i].Item2));
-                } else if(ComponentList[i].Item2 == Ports) {
-                    PossibleFollowers.Add(new Tuple<int, int>(ComponentList[i].Item2, ComponentList[i].Item1));
-
-                    // in Remainingcomponents muss das ding auch umgedreht werden
-                    ComponentList[i] = new Tuple<int, int>(ComponentList[i].Item2, ComponentList[i].Item1);
+                    PossibleFollowers.Add(element);
                 }
             }
-            // PossibleFollowers sind jetzt alle Elemente die auf Ports folgen könnten
-            Console.WriteLine("Possiblefollowers wurden identifiziert");
 
-            // Wenn es PossibleFollower gibt müssen diese weiter geprüft werden
-            if (PossibleFollowers.Count > 0)
+            // Wenn es keine gibt zurückgeben
+            if (PossibleFollowers.Count == 0)
             {
-                for (int i = 0; i < PossibleFollowers.Count; i++)
-                {
-                    List<Tuple<int, int>> TestBridge = new List<Tuple<int, int>>(Bridge);
-                    TestBridge.Add(PossibleFollowers[i]);
+                return Bridge;
+            }
 
-                    List<Tuple<int, int>> RemainingComponents = new List<Tuple<int, int>>(ComponentList);
-                    // Removen
-                    for (int j = 0; j < RemainingComponents.Count; j++)
+            List<int> Bridges = new List<int>();
+            foreach (var element in PossibleFollowers)
+            {
+                int Strength = Bridge + element.Item1 + element.Item2;
+
+                int NextPorts = Ports == element.Item1 ? element.Item2 : element.Item1;
+
+                List<(int, int)> RemainingComponents = new List<(int, int)>(Components);
+                RemainingComponents.Remove(element);
+
+                Bridges.Add(GetMaxStrength(Strength, NextPorts, RemainingComponents));
+            }
+
+            // Stärkste Brücke finden
+            int StrongestBridge = Bridges[0];
+            for (int i = 1; i < Bridges.Count; i++)
+            {
+                if (Bridges[i] > StrongestBridge)
+                {
+                    StrongestBridge = Bridges[i];
+                }
+            }
+
+            return StrongestBridge;
+        }
+
+
+        private static (int, int) GetMaxLength((int, int) Bridge, int Ports, List<(int, int)> Components)
+        {
+            // Possible Followers getten
+            List<(int, int)> PossibleFollowers = new List<(int, int)>();
+            foreach (var element in Components)
+            {
+                if (element.Item1 == Ports || element.Item2 == Ports)
+                {
+                    PossibleFollowers.Add(element);
+                }
+            }
+
+            // Wenn es keine gibt zurückgeben
+            if (PossibleFollowers.Count == 0)
+            {
+                return Bridge;
+            }
+
+            List<(int, int)> Bridges = new List<(int, int)>();
+            foreach (var element in PossibleFollowers)
+            {
+                int Strength = Bridge.Item1 + element.Item1 + element.Item2;
+                int Length = Bridge.Item2 + 1;
+
+                int NextPorts = Ports == element.Item1 ? element.Item2 : element.Item1;
+
+                List<(int, int)> RemainingComponents = new List<(int, int)>(Components);
+                RemainingComponents.Remove(element);
+
+                Bridges.Add(GetMaxLength((Strength, Length), NextPorts, RemainingComponents));
+            }
+
+            // Längste Brücke finden
+            (int, int) LongestBridge = Bridges[0];
+            for (int i = 1; i < Bridges.Count; i++)
+            {
+                if (Bridges[i].Item2 > LongestBridge.Item2)
+                {
+                    LongestBridge = Bridges[i];
+                }
+                else if (Bridges[i].Item2 == LongestBridge.Item2)
+                {
+                    if (Bridges[i].Item1 > LongestBridge.Item1)
                     {
-                        if (RemainingComponents[j].Item1 == PossibleFollowers[i].Item1 && RemainingComponents[j].Item2 == PossibleFollowers[i].Item2)
-                        {
-                            RemainingComponents.RemoveAt(j);
-                            break;
-                        }
-                    }
-
-                    if (FindMaxLength(TestBridge, RemainingComponents, MaxLength) > MaxLength)
-                    {
-                        MaxLength = FindMaxLength(TestBridge, RemainingComponents, MaxLength);
+                        LongestBridge = Bridges[i];
                     }
                 }
-
-                return MaxLength;
             }
-            else
-            {
-                //PrintBridge(Bridge);
-                return GetStrength(Bridge) > MaxLength ? GetStrength(Bridge) : MaxLength;
-            }
-        }
 
-
-
-        private static int GetStrength(List<Tuple<int, int>> Bridge)
-        {
-            return GetStrength(Bridge, 0);
-        }
-
-        private static int GetStrength(List<Tuple<int, int>> Bridge, int Index)
-        {
-            if (Index == Bridge.Count - 1)
-            {
-                return Bridge[Index].Item1 + Bridge[Index].Item2;
-            }
-            else
-            {
-                return Bridge[Index].Item1 + Bridge[Index].Item2 + GetStrength(Bridge, Index + 1);
-            }
-        }
-
-
-        private static void PrintBridge(List<Tuple<int, int>> Bridge)
-        {
-            Console.Write("Bridge: ");
-            for (int i = 0; i < Bridge.Count; i++)
-            {
-                if (i + 1 % 10 == 0)
-                {
-                    Console.WriteLine();
-                }
-
-                Console.Write(Bridge[i].Item1 + "/" + Bridge[i].Item2 + "--");
-            }
-            Console.WriteLine();
+            return LongestBridge;
         }
     }
 }
