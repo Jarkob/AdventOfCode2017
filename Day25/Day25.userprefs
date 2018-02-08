@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{336DB744-438C-4213-B45D-6F7D1C85A8F3}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Day25/DoubleList.cs">
+    <Files>
+      <File FileName="Day25/Program.cs" Line="20" Column="25" />
+      <File FileName="Day25/DoubleList.cs" Line="2" Column="13" />
+      <File FileName="Day25/Day25.txt" Line="62" Column="29" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Day25 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
