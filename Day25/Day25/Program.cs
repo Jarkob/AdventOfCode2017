@@ -149,6 +149,7 @@ namespace Day25
             int Sum = GetChecksum(Tape);
 
             Console.WriteLine("Checksum: " + Sum);
+            // 4387
         }
 
 
