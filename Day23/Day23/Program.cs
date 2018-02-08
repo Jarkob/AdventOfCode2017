@@ -112,32 +112,6 @@ namespace Day23
 
         public static void Part2()
         {
-            // Get input
-            string[] Input = File.ReadAllLines("../../Day23.txt");
-            string[][] Commands = new string[Input.Length][];
-
-            for (int i = 0; i < Input.Length; i++)
-            {
-                Commands[i] = Input[i].Split(' ');
-            }
-
-
-            // Set up registers
-            IDictionary<char, long> Registers = new Dictionary<char, long>();
-            Registers.Add('a', 1);
-            Registers.Add('b', 0);
-            Registers.Add('c', 0);
-            Registers.Add('d', 0);
-            Registers.Add('e', 0);
-            Registers.Add('f', 0);
-            Registers.Add('g', 0);
-            Registers.Add('h', 0);
-
-
-            // Doesn't work
-
-            Console.WriteLine("Value of h: " + Registers['h']);
-
             // Try to refactor
             int a = 1;
             int b = 0;
