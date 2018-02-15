@@ -113,139 +113,59 @@ namespace Day23
         public static void Part2()
         {
             // Try to refactor
-            int a = 1;
-            int b = 0;
-            int c = 0;
-            int d = 0;
-            int e = 0;
-            int f = 0;
-            int g = 0;
-            int h = 0;
+            long a = 1;
+            long b = 0;
+            long c = 0;
+            long d = 0;
+            long e = 0;
+            long f = 0;
+            long g = 0;
+            long h = 0;
 
             // Backup
-            //    b = 65;
-            //    c = b;
-            //    if (a != 0) { goto A; }
-            //    goto B;
-            //    b *= 100;
-            //A:
-            //    b -= 100000;
-            //    c = b;
-            //    c -= 17000;
-            //B:
-            //    f = 1;
-            //    d = 2;
-            //E:
-            //    e = 2;
-            //D:
-            //    g = d;
-            //    g *= e;
-            //    g -= b;
-            //    if (g != 0) { goto C; }
-            //    f = 0;
-            //C:
-            //    e -= 1;
-            //    g = e;
-            //    g -= b;
-            //    if (g != 0) { goto D; }
-            //    d -= 1;
-            //    g = d;
-            //    g -= b;
-            //    if (g != 0) { goto E; }
-            //    if (f != 0) { goto F; }
-            //    h -= 1;
-            //F:
-            //    g = b;
-            //    g -= c;
-            //    if (g != 0) { goto G; }
-            //    goto H;
-            //G:
-            //    b -= 17;
-            //    goto B;
-            //H:
-            //Console.WriteLine(h);
-
-
-            // Backup 2
-            //b = 65;
-            //c = b;
-
-            //while (true)
-            //{
-            //    //f = 1;
-            //    d = 2;
-            //    do
-            //    {
-            //        e = 2;
-            //        do
-            //        {
-            //            g = d;
-            //            g *= e;
-            //            g -= b;
-            //            //if (g == 0)
-            //            //{
-            //            //    f = 0;
-            //            //}
-            //            e -= 1;
-            //            g = e;
-            //            g -= b;
-            //        } while (g != 0);
-            //        d -= 1;
-            //        g = d;
-            //        g -= b;
-            //    } while (g != 0);
-            //    //if (f == 0)
-            //    //{
-            //    //    h -= 1;
-            //    //}
-            //    g = b;
-            //    g -= c;
-            //    if (g == 0)
-            //    {
-            //        break;
-            //    }
-            //    b -= 17;
-            //}
-
-            //Console.WriteLine("Programm ist terminiert, h = " + h);
-
-
-            // Anfang
-
-            // f wird nicht verwendet
-
             b = 65;
             c = b;
-
-            while (true)
-            {
-                d = 2;
-                do
-                {
-                    e = 2;
-                    do
-                    {
-                        g = d;
-                        g *= e;
-                        g -= b;
-                        e -= 1;
-                        g = e;
-                        g -= b;
-                    } while (g != 0);
-                    d -= 1;
-                    g = d;
-                    g -= b;
-                } while (g != 0);
-                g = b;
-                g -= c;
-                if (g == 0)
-                {
-                    break;
-                }
-                b -= 17;
-            }
-
+            if (a != 0) { goto A; }
+            goto B;
+        A:
+            b *= 100;
+            b -= -100000;
+            c = b;
+            c -= -17000;
+        B:
+            f = 1;
+            d = 2;
+        E:
+            e = 2;
+        D:
+            g = d;
+            g *= e;
+            g -= b;
+            if (g != 0) { goto C; }
+            f = 0;
+        C:
+            e -= -1;
+            g = e;
+            g -= b;
+            if (g != 0) { goto D; }
+            d -= -1;
+            g = d;
+            g -= b;
+            if (g != 0) { goto E; }
+            if (f != 0) { goto F; }
+            h -= -1;
+        F:
+            g = b;
+            g -= c;
+            if (g != 0) { goto G; }
+            goto H;
+        G:
+            b -= -17;
+            goto B;
+        H:
             Console.WriteLine("Programm ist terminiert, h = " + h);
+
+            // Rework
         }
     }
 }
