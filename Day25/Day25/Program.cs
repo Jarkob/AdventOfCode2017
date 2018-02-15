@@ -145,6 +145,7 @@ namespace Day25
             }
 
             Console.WriteLine();
+
             Console.WriteLine("Calculating Checksum");
             int Sum = GetChecksum(Tape);
 
