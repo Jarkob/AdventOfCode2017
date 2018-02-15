@@ -123,49 +123,172 @@ namespace Day23
             long h = 0;
 
             // Backup
-            b = 65;
-            c = b;
-            if (a != 0) { goto A; }
-            goto B;
-        A:
-            b *= 100;
-            b -= -100000;
-            c = b;
-            c -= -17000;
-        B:
-            f = 1;
-            d = 2;
-        E:
-            e = 2;
-        D:
-            g = d;
-            g *= e;
-            g -= b;
-            if (g != 0) { goto C; }
-            f = 0;
-        C:
-            e -= -1;
-            g = e;
-            g -= b;
-            if (g != 0) { goto D; }
-            d -= -1;
-            g = d;
-            g -= b;
-            if (g != 0) { goto E; }
-            if (f != 0) { goto F; }
-            h -= -1;
-        F:
-            g = b;
-            g -= c;
-            if (g != 0) { goto G; }
-            goto H;
-        G:
-            b -= -17;
-            goto B;
-        H:
-            Console.WriteLine("Programm ist terminiert, h = " + h);
+            //    b = 65;
+            //    c = b;
+            //    if (a != 0) { goto A; }
+            //    goto B;
+            //A:
+            //    b *= 100;
+            //    b -= -100000;
+            //    c = b;
+            //    c -= -17000;
+            //B:
+            //    f = 1;
+            //    d = 2;
+            //E:
+            //    e = 2;
+            //D:
+            //    g = d;
+            //    g *= e;
+            //    g -= b;
+            //    if (g != 0) { goto C; }
+            //    f = 0;
+            //C:
+            //    e -= -1;
+            //    g = e;
+            //    g -= b;
+            //    if (g != 0) { goto D; }
+            //    d -= -1;
+            //    g = d;
+            //    g -= b;
+            //    if (g != 0) { goto E; }
+            //    if (f != 0) { goto F; }
+            //    h -= -1;
+            //F:
+            //    g = b;
+            //    g -= c;
+            //    if (g != 0) { goto G; }
+            //    goto H;
+            //G:
+            //    b -= -17;
+            //    goto B;
+            //H:
+            //Console.WriteLine("Programm ist terminiert, h = " + h);
+
+            // Backup2
+            //b = 65;
+            //c = b;
+            //b *= 100;
+            //b -= -100000;
+            //c = b;
+            //c -= -17000;
+            //while (true)
+            //{
+            //    f = 1;
+            //    d = 2;
+            //    do
+            //    {
+            //        e = 2;
+            //        do
+            //        {
+            //            g = d;
+            //            g *= e;
+            //            g -= b;
+            //            if (g == 0)
+            //            {
+            //                f = 0;
+            //            }
+            //            e -= -1;
+            //            g = e;
+            //            g -= b;
+            //        } while (g != 0);
+            //        d -= -1;
+            //        g = d;
+            //        g -= b;
+            //    } while (g != 0);
+            //    if (f == 0)
+            //    {
+            //        h -= -1;
+            //    }
+            //    g = b;
+            //    g -= c;
+            //    if (g == 0)
+            //    {
+            //        throw new Exception("Program terminated: h = " + h);
+            //    }
+            //    b -= -17;
+            //}
+
+
+            // Backup3
+            //b = 106500;
+            //c = 123500;
+
+            //while (true)
+            //{
+            //    f = 1;
+            //    d = 2;
+
+            //    do
+            //    {
+            //        e = 2;
+
+            //        do
+            //        {
+            //            g = d;
+            //            g *= e;
+            //            g -= b;
+
+            //            if (g == 0)
+            //            {
+            //                f = 0;
+            //            }
+
+            //            e++;
+            //            g = e;
+            //            g -= b;
+
+            //        } while (g != 0);
+
+            //        d++;
+            //        g = d;
+            //        g -= b;
+
+            //    } while (g != 0);
+
+            //    if (f == 0)
+            //    {
+            //        h++;
+            //    }
+
+            //    // 2. Program terminates when b - c == 0, when b == c
+            //    g = b;
+            //    g -= c;
+
+            //    if (g == 0) // 1. Program terminates when g == 0
+            //    {
+            //        throw new Exception("Program terminated: h = " + h);
+            //    }
+
+            //    b -= -17;
+            //}
 
             // Rework
+            b = 106500;
+            c = 123500;
+
+            do
+            {
+                f = 1;
+                d = 2;
+                e = 2;
+
+                for (d = 2; d < b; d++)
+                {
+                    if (b % d == 0)
+                    {
+                        f = 0;
+                        break;
+                    }
+                }
+                if (f == 0)
+                {
+                    h++;
+                }
+                g = b - c;
+                b += 17;
+            } while (g != 0);
+            Console.WriteLine("Programm ist terminiert, h = " + h);
         }
     }
 }
